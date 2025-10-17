@@ -172,11 +172,11 @@ export function ConfirmationDrawer({
       <Button
         onClick={onConfirm}
         size="lg"
-        className="w-full"
+        className="w-full bg-[#2664DC] hover:bg-[#1e4fb8] text-white"
       >
         Confirm Swap (Stub)
       </Button>
-      <p className="text-xs text-center text-muted-foreground w-full mt-2">
+      <p className="text-xs text-left text-muted-foreground w-full mt-2">
         This is a prototype. No actual transaction will be executed.
       </p>
     </>

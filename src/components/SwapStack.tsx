@@ -170,6 +170,7 @@ export function SwapStack() {
               id="hide-ip"
               checked={hideIP}
               onCheckedChange={setHideIP}
+              className="data-[state=checked]:bg-[#2664DC]"
             />
             <Label htmlFor="hide-ip" className="text-sm cursor-pointer">
               Hide IP

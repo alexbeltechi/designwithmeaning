@@ -47,6 +47,7 @@ export function RoutesSection({
             id="advanced-mode"
             checked={viewMode === 'advanced'}
             onCheckedChange={(checked) => onViewModeChange(checked ? 'advanced' : 'simple')}
+            className="data-[state=checked]:bg-[#2664DC]"
           />
           <Label htmlFor="advanced-mode" className="text-sm cursor-pointer">
             Advanced

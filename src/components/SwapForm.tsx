@@ -95,12 +95,12 @@ export function SwapForm({ onValidInputs, slippagePct, onSlippageChange, selecte
 
   return (
     <>
-      <Card className="p-5 space-y-4">
+      <Card className="p-5 space-y-2">
         {/* Chain Selector */}
         <div className="space-y-2">
-          <Label htmlFor="chain" className="text-xs text-muted-foreground">
+          <h1 className="text-xl font-bold">
             Chain
-          </Label>
+          </h1>
           <Select value={chain} onValueChange={setChain}>
             <SelectTrigger id="chain" className="w-full">
               <SelectValue />
@@ -227,7 +227,7 @@ export function SwapForm({ onValidInputs, slippagePct, onSlippageChange, selecte
         </div>
 
         {/* Slippage Controls at Bottom */}
-        <div className="pt-4 border-t border-border space-y-3">
+        <div className="pt-2 space-y-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-1.5">
               <span className="text-sm font-medium">Slippage tolerance</span>
@@ -241,7 +241,7 @@ export function SwapForm({ onValidInputs, slippagePct, onSlippageChange, selecte
                 variant={slippagePct === preset && !customSlippage ? 'default' : 'outline'}
                 size="sm"
                 onClick={() => handleSlippagePreset(preset)}
-                className="flex-1"
+                className={`flex-1 ${slippagePct === preset && !customSlippage ? 'bg-[#2664DC] hover:bg-[#1e4fb8] text-white' : ''}`}
               >
                 {preset}%
               </Button>
