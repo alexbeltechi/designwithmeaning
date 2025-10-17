@@ -127,7 +127,7 @@ export function SwapStack() {
         <div className="space-y-4 mb-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold">🦙 alpaca swap</h1>
+              <h1 className="text-2xl font-bold">🦙AlpacaSwap</h1>
               <p className="text-sm text-muted-foreground mt-1">
                 <span className="text-emerald-600 dark:text-emerald-500 font-medium">
                   TOTAL SWAPPED: $23B

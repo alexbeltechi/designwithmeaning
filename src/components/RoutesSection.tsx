@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
 import { RadioGroup } from '@/components/ui/radio-group';
 import { Route } from '@/lib/mockRoutes';
 import { RouteCard } from '@/components/RouteCard';
@@ -41,16 +42,16 @@ export function RoutesSection({
           </p>
         </div>
         
-        <Tabs value={viewMode} onValueChange={(value) => onViewModeChange(value as 'simple' | 'advanced')}>
-          <TabsList>
-            <TabsTrigger value="simple" className="px-4">
-              Simple
-            </TabsTrigger>
-            <TabsTrigger value="advanced" className="px-4">
-              Advanced
-            </TabsTrigger>
-          </TabsList>
-        </Tabs>
+        <div className="flex items-center space-x-2">
+          <Switch
+            id="advanced-mode"
+            checked={viewMode === 'advanced'}
+            onCheckedChange={(checked) => onViewModeChange(checked ? 'advanced' : 'simple')}
+          />
+          <Label htmlFor="advanced-mode" className="text-sm cursor-pointer">
+            Advanced
+          </Label>
+        </div>
       </div>
 
       {/* Routes */}

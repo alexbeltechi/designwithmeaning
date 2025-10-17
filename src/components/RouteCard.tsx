@@ -28,23 +28,30 @@ export function RouteCard({
   return (
     <Card
       className={`relative cursor-pointer transition-all hover:border-[#2664DC]/50 ${
-        isSelected ? 'border-[#2664DC] ring-2 ring-[#2664DC]/20' : ''
+        isSelected ? 'border-[#2664DC] border-2' : ''
       }`}
       onClick={onSelect}
     >
       <div className="p-3 space-y-2">
         {/* BEST Badge - Top Left */}
         {isBest && (
-          <div className="absolute top-2 left-2">
+          <div className="absolute top-3 left-3">
             <Badge className="bg-emerald-600 text-white text-xs">
               BEST
             </Badge>
           </div>
         )}
 
-        {/* Header with Output and Check */}
-        <div className="flex items-start gap-2">
-          <div className="flex-1 space-y-0.5 mt-6">
+        {/* Checkmark - Top Right */}
+        {isSelected && (
+          <div className="absolute top-3 right-3">
+            <Check className="h-4 w-4" style={{ color: '#2664DC' }} />
+          </div>
+        )}
+
+        {/* Header with Output */}
+        <div className="flex items-start gap-2" style={{ paddingTop: '16px' }}>
+          <div className="flex-1 space-y-0.5">
             {/* Output Amount */}
             <div className="flex items-baseline gap-2">
               <span className="text-lg font-semibold">
@@ -53,9 +60,6 @@ export function RouteCard({
               <span className="text-sm text-muted-foreground">
                 USDC
               </span>
-              {isSelected && (
-                <Check className="h-4 w-4 ml-auto" style={{ color: '#2664DC' }} />
-              )}
             </div>
 
             {/* Fiat + After Gas */}
