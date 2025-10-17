@@ -208,7 +208,7 @@ export function SwapStack() {
         {routes.length > 0 && selectedRoute && !loading && (
           <Button
             size="lg"
-            className="w-full"
+            className="w-full bg-[#2664DC] hover:bg-[#1e4fb8] text-white"
             onClick={handleSwap}
           >
             Swap

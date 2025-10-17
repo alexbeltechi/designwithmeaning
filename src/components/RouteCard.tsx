@@ -32,7 +32,7 @@ export function RouteCard({
       }`}
       onClick={onSelect}
     >
-      <div className="p-3 space-y-2">
+      <div className="p-3 pb-3 space-y-2">
         {/* BEST Badge - Top Left */}
         {isBest && (
           <div className="absolute top-3 left-3">
@@ -50,7 +50,7 @@ export function RouteCard({
         )}
 
         {/* Header with Output */}
-        <div className="flex items-start gap-2" style={{ paddingTop: '16px' }}>
+        <div className="flex items-start gap-2" style={{ paddingTop: '8px' }}>
           <div className="flex-1 space-y-0.5">
             {/* Output Amount */}
             <div className="flex items-baseline gap-2">

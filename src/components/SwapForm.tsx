@@ -118,14 +118,12 @@ export function SwapForm({ onValidInputs, slippagePct, onSlippageChange, selecte
           </Select>
         </div>
 
-        <Separator />
-
         {/* From Token */}
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <Label htmlFor="from-amount" className="text-xs text-muted-foreground">
-              From
-            </Label>
+            <h1 className="text-xl font-bold">
+              You sell
+            </h1>
             {fromTokenData && (
               <span className="text-xs text-muted-foreground">
                 Bal: {formatNumber(fromTokenData.balance, 4)}
@@ -173,7 +171,7 @@ export function SwapForm({ onValidInputs, slippagePct, onSlippageChange, selecte
         </div>
 
         {/* Flip Button */}
-        <div className="flex justify-center">
+        <div className="flex justify-center -my-2">
           <Button
             variant="outline"
             size="sm"
@@ -187,9 +185,9 @@ export function SwapForm({ onValidInputs, slippagePct, onSlippageChange, selecte
         {/* To Token */}
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <Label htmlFor="to-token" className="text-xs text-muted-foreground">
-              To
-            </Label>
+            <h1 className="text-xl font-bold">
+              You buy
+            </h1>
             {toTokenData && (
               <span className="text-xs text-muted-foreground">
                 Bal: {formatNumber(toTokenData.balance, 2)}
@@ -228,23 +226,49 @@ export function SwapForm({ onValidInputs, slippagePct, onSlippageChange, selecte
           )}
         </div>
 
-        <Separator />
-
-        {/* Slippage Quick View */}
-        <div className="flex items-center justify-between text-xs">
-          <div className="flex items-center gap-1.5 text-muted-foreground">
-            <span>Slippage tolerance</span>
-            <HelpTip content={HELP_CONTENT.slippage} />
+        {/* Slippage Controls at Bottom */}
+        <div className="pt-4 border-t border-border space-y-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-1.5">
+              <span className="text-sm font-medium">Slippage tolerance</span>
+              <HelpTip content={HELP_CONTENT.slippage} />
+            </div>
           </div>
-          <Button
-            variant="ghost"
-            size="sm"
-            className="h-auto p-0 text-xs"
-            onClick={() => setSettingsOpen(true)}
-          >
-            <span className="font-medium">{slippagePct}%</span>
-            <Settings2 className="h-3 w-3 ml-1" />
-          </Button>
+          <div className="flex gap-2">
+            {SLIPPAGE_PRESETS.map((preset) => (
+              <Button
+                key={preset}
+                variant={slippagePct === preset && !customSlippage ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => handleSlippagePreset(preset)}
+                className="flex-1"
+              >
+                {preset}%
+              </Button>
+            ))}
+            <div className="relative flex-1">
+              <Input
+                type="number"
+                placeholder="Custom"
+                value={customSlippage}
+                onChange={(e) => handleCustomSlippage(e.target.value)}
+                className="pr-6 h-9"
+              />
+              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-muted-foreground">
+                %
+              </span>
+            </div>
+          </div>
+          {slippagePct > 1 && (
+            <p className="text-xs text-amber-600 dark:text-amber-500">
+              High slippage tolerance may result in unfavorable trades
+            </p>
+          )}
+          {slippagePct < 0.1 && slippagePct > 0 && (
+            <p className="text-xs text-blue-600 dark:text-blue-500">
+              Very low slippage may cause transaction failures
+            </p>
+          )}
         </div>
       </Card>
 
