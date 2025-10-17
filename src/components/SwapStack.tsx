@@ -127,7 +127,12 @@ export function SwapStack() {
         <div className="space-y-4 mb-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold">🦙AlpacaSwap</h1>
+              <h1 
+                className="text-2xl font-bold cursor-pointer hover:opacity-80 transition-opacity" 
+                onClick={() => window.location.reload()}
+              >
+                🦙AlpacaSwap
+              </h1>
               <p className="text-sm text-muted-foreground mt-1">
                 <span className="text-emerald-600 dark:text-emerald-500 font-medium">
                   TOTAL SWAPPED: $23B
@@ -170,7 +175,6 @@ export function SwapStack() {
               id="hide-ip"
               checked={hideIP}
               onCheckedChange={setHideIP}
-              className="data-[state=checked]:bg-[#2664DC]"
             />
             <Label htmlFor="hide-ip" className="text-sm cursor-pointer">
               Hide IP

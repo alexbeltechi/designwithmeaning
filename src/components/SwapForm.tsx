@@ -119,8 +119,8 @@ export function SwapForm({ onValidInputs, slippagePct, onSlippageChange, selecte
         </div>
 
         {/* From Token */}
-        <div className="space-y-2">
-          <div className="flex items-center justify-between">
+        <div className="space-y-0">
+          <div className="flex items-center justify-between mb-2">
             <h1 className="text-xl font-bold">
               You sell
             </h1>
@@ -171,7 +171,7 @@ export function SwapForm({ onValidInputs, slippagePct, onSlippageChange, selecte
         </div>
 
         {/* Flip Button */}
-        <div className="flex justify-center -my-2">
+        <div className="flex justify-center -my-3">
           <Button
             variant="outline"
             size="sm"
@@ -183,8 +183,8 @@ export function SwapForm({ onValidInputs, slippagePct, onSlippageChange, selecte
         </div>
 
         {/* To Token */}
-        <div className="space-y-2">
-          <div className="flex items-center justify-between">
+        <div className="space-y-0">
+          <div className="flex items-center justify-between mb-2">
             <h1 className="text-xl font-bold">
               You buy
             </h1>
