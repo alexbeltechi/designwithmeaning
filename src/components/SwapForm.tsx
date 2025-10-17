@@ -22,7 +22,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
-import { Inputs, MOCK_CHAINS, MOCK_TOKENS } from '@/lib/mockRoutes';
+import { Inputs, MOCK_CHAINS, MOCK_TOKENS, Route } from '@/lib/mockRoutes';
 import { formatNumber } from '@/lib/format';
 import { HelpTip, HELP_CONTENT } from '@/components/HelpTip';
 
@@ -30,11 +30,12 @@ interface SwapFormProps {
   onValidInputs: (inputs: Inputs) => void;
   slippagePct: number;
   onSlippageChange: (value: number) => void;
+  selectedRoute: Route | null;
 }
 
 const SLIPPAGE_PRESETS = [0.1, 0.5, 1.0];
 
-export function SwapForm({ onValidInputs, slippagePct, onSlippageChange }: SwapFormProps) {
+export function SwapForm({ onValidInputs, slippagePct, onSlippageChange, selectedRoute }: SwapFormProps) {
   const [chain, setChain] = useState(MOCK_CHAINS[0].id);
   const [fromToken, setFromToken] = useState(MOCK_TOKENS[0].id);
   const [toToken, setToToken] = useState(MOCK_TOKENS[1].id);
@@ -196,9 +197,14 @@ export function SwapForm({ onValidInputs, slippagePct, onSlippageChange }: SwapF
             )}
           </div>
           <div className="flex gap-2">
-            <div className="flex-1 flex items-center h-12 px-3 rounded-md border bg-muted/30 text-muted-foreground">
-              <span className="text-sm">Calculated from route</span>
-            </div>
+            <Input
+              id="to-amount"
+              type="text"
+              value={selectedRoute ? formatNumber(selectedRoute.outputAmount, 2) : ''}
+              readOnly
+              placeholder="0.0"
+              className="flex-1 text-lg h-12 bg-muted/30"
+            />
             <Select value={toToken} onValueChange={setToToken}>
               <SelectTrigger className="w-[140px] h-12">
                 <SelectValue />
@@ -215,6 +221,11 @@ export function SwapForm({ onValidInputs, slippagePct, onSlippageChange }: SwapF
               </SelectContent>
             </Select>
           </div>
+          {selectedRoute && (
+            <p className="text-xs text-muted-foreground">
+              ≈ ${formatNumber(selectedRoute.outputFiat, 2)}
+            </p>
+          )}
         </div>
 
         <Separator />

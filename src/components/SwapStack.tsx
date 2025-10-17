@@ -182,6 +182,7 @@ export function SwapStack() {
           onValidInputs={fetchRoutes}
           slippagePct={slippagePct}
           onSlippageChange={setSlippagePct}
+          selectedRoute={selectedRoute}
         />
 
         {/* Routes Section - Only show when routes are available */}
