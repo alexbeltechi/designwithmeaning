@@ -13,12 +13,12 @@ interface HelpTipProps {
 
 export function HelpTip({ content, className = '' }: HelpTipProps) {
   return (
-    <TooltipProvider delayDuration={100}>
-      <Tooltip>
-        <TooltipTrigger asChild>
+    <TooltipProvider delayDuration={100} data-component="shadcn-tooltip-provider">
+      <Tooltip data-component="shadcn-tooltip">
+        <TooltipTrigger asChild data-component="shadcn-tooltip-trigger">
           <HelpCircle className={`h-4 w-4 text-muted-foreground hover:text-foreground cursor-help transition-colors ${className}`} />
         </TooltipTrigger>
-        <TooltipContent className="max-w-xs">
+        <TooltipContent className="max-w-xs" data-component="shadcn-tooltip-content">
           <p className="text-sm">{content}</p>
         </TooltipContent>
       </Tooltip>

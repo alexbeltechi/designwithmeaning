@@ -30,7 +30,7 @@ export function RoutesSection({
   const bestRoute = routes[0]; // Already sorted by best
 
   return (
-    <div className="space-y-4 mt-6">
+    <div className="space-y-4 mt-6" data-section="routes-section">
       {/* Section Header */}
       <div className="flex items-center justify-between">
         <div className="space-y-1">
@@ -42,20 +42,22 @@ export function RoutesSection({
           </p>
         </div>
         
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2" data-section="advanced-toggle">
           <Switch
             id="advanced-mode"
             checked={viewMode === 'advanced'}
             onCheckedChange={(checked) => onViewModeChange(checked ? 'advanced' : 'simple')}
+            data-component="shadcn-switch"
+            data-id="advanced-mode"
           />
-          <Label htmlFor="advanced-mode" className="text-sm cursor-pointer">
+          <Label htmlFor="advanced-mode" className="text-sm cursor-pointer" data-component="shadcn-label">
             Advanced
           </Label>
         </div>
       </div>
 
       {/* Routes */}
-      <RadioGroup value={selectedRouteId} onValueChange={onSelectRoute}>
+      <RadioGroup value={selectedRouteId} onValueChange={onSelectRoute} data-component="shadcn-radio-group">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {displayedRoutes.map((route) => (
             <RouteCard
@@ -77,6 +79,10 @@ export function RoutesSection({
           size="sm"
           onClick={() => setShowAll(!showAll)}
           className="w-full"
+          data-component="shadcn-button"
+          data-variant="outline"
+          data-action="toggle-routes"
+          data-state={showAll ? 'expanded' : 'collapsed'}
         >
           {showAll ? (
             <>

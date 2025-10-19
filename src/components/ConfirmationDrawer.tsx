@@ -63,9 +63,9 @@ export function ConfirmationDrawer({
   const minReceived = route.outputAmount * (1 - slippagePct / 100);
 
   const content = (
-    <div className="space-y-4 py-4">
+    <div className="space-y-4 py-4" data-section="confirmation-content">
       {/* Swap Summary */}
-      <div className="space-y-3">
+      <div className="space-y-3" data-section="swap-summary">
         <div className="flex items-center justify-between text-sm">
           <span className="text-muted-foreground">You pay</span>
           <span className="font-semibold">
@@ -88,10 +88,10 @@ export function ConfirmationDrawer({
         </div>
       </div>
 
-      <Separator />
+      <Separator data-component="shadcn-separator" />
 
       {/* Route Details */}
-      <div className="space-y-3">
+      <div className="space-y-3" data-section="route-details">
         <div className="flex items-center justify-between text-sm">
           <span className="text-muted-foreground">Route</span>
           <span className="font-medium">{route.aggregator}</span>
@@ -118,7 +118,7 @@ export function ConfirmationDrawer({
             <span className="text-muted-foreground">Features</span>
             <div className="flex flex-wrap gap-1.5 justify-end">
               {route.badges.map((badge) => (
-                <Badge key={badge} variant="secondary" className="text-xs">
+                <Badge key={badge} variant="secondary" className="text-xs" data-component="shadcn-badge" data-variant="secondary">
                   {badge.replace('_', ' ')}
                 </Badge>
               ))}
@@ -127,10 +127,10 @@ export function ConfirmationDrawer({
         )}
       </div>
 
-      <Separator />
+      <Separator data-component="shadcn-separator" />
 
       {/* Trade Details */}
-      <div className="space-y-3">
+      <div className="space-y-3" data-section="trade-details">
         <div className="flex items-center justify-between text-sm">
           <span className="text-muted-foreground">Min. received</span>
           <span className="font-medium">
@@ -173,6 +173,10 @@ export function ConfirmationDrawer({
         onClick={onConfirm}
         size="lg"
         className="w-full bg-[#2664DC] hover:bg-[#1e4fb8] text-white"
+        data-component="shadcn-button"
+        data-variant="default"
+        data-size="lg"
+        data-action="confirm"
       >
         Confirm Swap (Stub)
       </Button>
@@ -185,16 +189,16 @@ export function ConfirmationDrawer({
   // Mobile: Use Sheet
   if (isMobile) {
     return (
-      <Sheet open={open} onOpenChange={onOpenChange}>
-        <SheetContent side="bottom" className="h-auto max-h-[90vh] overflow-y-auto">
-          <SheetHeader>
-            <SheetTitle>Confirm Swap</SheetTitle>
-            <SheetDescription>
+      <Sheet open={open} onOpenChange={onOpenChange} data-component="shadcn-sheet">
+        <SheetContent side="bottom" className="h-auto max-h-[90vh] overflow-y-auto" data-component="shadcn-sheet-content">
+          <SheetHeader data-component="shadcn-sheet-header">
+            <SheetTitle data-component="shadcn-sheet-title">Confirm Swap</SheetTitle>
+            <SheetDescription data-component="shadcn-sheet-description">
               Review your swap details before confirming
             </SheetDescription>
           </SheetHeader>
           {content}
-          <SheetFooter>
+          <SheetFooter data-component="shadcn-sheet-footer">
             {footer}
           </SheetFooter>
         </SheetContent>
@@ -204,16 +208,16 @@ export function ConfirmationDrawer({
 
   // Desktop: Use Dialog
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-md">
-        <DialogHeader>
-          <DialogTitle>Confirm Swap</DialogTitle>
-          <DialogDescription>
+    <Dialog open={open} onOpenChange={onOpenChange} data-component="shadcn-dialog">
+      <DialogContent className="max-w-md" data-component="shadcn-dialog-content">
+        <DialogHeader data-component="shadcn-dialog-header">
+          <DialogTitle data-component="shadcn-dialog-title">Confirm Swap</DialogTitle>
+          <DialogDescription data-component="shadcn-dialog-description">
             Review your swap details before confirming
           </DialogDescription>
         </DialogHeader>
         {content}
-        <DialogFooter className="flex-col">
+        <DialogFooter className="flex-col" data-component="shadcn-dialog-footer">
           {footer}
         </DialogFooter>
       </DialogContent>

@@ -121,10 +121,10 @@ export function SwapStack() {
   const selectedRoute = routes.find((r) => r.id === selectedRouteId) || null;
 
   return (
-    <div className="min-h-screen bg-background p-4 md:p-6">
+    <div className="min-h-screen bg-background p-4 md:p-6" data-component="swap-stack">
       <div className="max-w-xl mx-auto space-y-6">
         {/* Header */}
-        <div className="space-y-4 mb-8">
+        <div className="space-y-4 mb-8" data-section="header">
           <div className="flex items-center justify-between">
             <div>
               <h1 
@@ -140,13 +140,17 @@ export function SwapStack() {
                 {' '}ACROSS 16.5M TRANSACTIONS
               </p>
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-2" data-section="header-actions">
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={handleRefresh}
                 disabled={loading || routes.length === 0}
                 className="rounded-full h-9 w-9 p-0"
+                data-component="shadcn-button"
+                data-variant="ghost"
+                data-shape="rounded-full"
+                data-action="refresh"
               >
                 <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
               </Button>
@@ -155,6 +159,10 @@ export function SwapStack() {
                 size="sm"
                 className="rounded-full h-9 w-9 p-0"
                 onClick={() => {/* Settings could open a dialog */}}
+                data-component="shadcn-button"
+                data-variant="ghost"
+                data-shape="rounded-full"
+                data-action="settings"
               >
                 <Settings className="h-4 w-4" />
               </Button>
@@ -163,6 +171,10 @@ export function SwapStack() {
                 size="sm"
                 className="rounded-full h-9 w-9 p-0"
                 onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                data-component="shadcn-button"
+                data-variant="ghost"
+                data-shape="rounded-full"
+                data-action="theme-toggle"
               >
                 {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
               </Button>
@@ -170,13 +182,15 @@ export function SwapStack() {
           </div>
           
           {/* Hide IP Toggle */}
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2" data-section="hide-ip-toggle">
             <Switch
               id="hide-ip"
               checked={hideIP}
               onCheckedChange={setHideIP}
+              data-component="shadcn-switch"
+              data-id="hide-ip"
             />
-            <Label htmlFor="hide-ip" className="text-sm cursor-pointer">
+            <Label htmlFor="hide-ip" className="text-sm cursor-pointer" data-component="shadcn-label">
               Hide IP
             </Label>
           </div>
@@ -203,9 +217,9 @@ export function SwapStack() {
 
         {/* Loading State */}
         {loading && (
-          <div className="space-y-3">
-            <div className="h-[200px] rounded-lg border bg-muted/30 animate-pulse" />
-            <div className="h-[200px] rounded-lg border bg-muted/30 animate-pulse" />
+          <div className="space-y-3" data-section="loading-state">
+            <div className="h-[200px] rounded-lg border bg-muted/30 animate-pulse" data-component="skeleton" />
+            <div className="h-[200px] rounded-lg border bg-muted/30 animate-pulse" data-component="skeleton" />
           </div>
         )}
 
@@ -215,6 +229,10 @@ export function SwapStack() {
             size="lg"
             className="w-full bg-[#2664DC] hover:bg-[#1e4fb8] text-white"
             onClick={handleSwap}
+            data-component="shadcn-button"
+            data-variant="default"
+            data-size="lg"
+            data-action="swap"
           >
             Swap
           </Button>

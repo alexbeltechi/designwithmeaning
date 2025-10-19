@@ -31,12 +31,16 @@ export function RouteCard({
         isSelected ? 'border-[#2664DC] border-2' : ''
       }`}
       onClick={onSelect}
+      data-component="shadcn-card"
+      data-variant="route-card"
+      data-state={isSelected ? 'selected' : 'default'}
+      data-is-best={isBest}
     >
       <div className="p-3 pb-3 space-y-2">
         {/* BEST Badge - Top Left */}
         {isBest && (
           <div className="absolute top-3 left-3">
-            <Badge className="bg-emerald-600 text-white text-xs">
+            <Badge className="bg-emerald-600 text-white text-xs" data-component="shadcn-badge" data-variant="best">
               BEST
             </Badge>
           </div>
@@ -80,11 +84,13 @@ export function RouteCard({
                         ? 'bg-blue-600/90 text-white text-xs'
                         : badge === 'FAST'
                         ? 'bg-orange-600/90 text-white text-xs'
-                        : badge === 'MEV_PROTECTED'
-                        ? 'bg-purple-600/90 text-white text-xs'
-                        : 'text-xs'
-                    }
-                  >
+                        :                   badge === 'MEV_PROTECTED'
+                    ? 'bg-purple-600/90 text-white text-xs'
+                    : 'text-xs'
+                }
+                data-component="shadcn-badge"
+                data-variant={badge.toLowerCase().replace('_', '-')}
+              >
                     {badge.replace('_', ' ')}
                   </Badge>
                 ))}
