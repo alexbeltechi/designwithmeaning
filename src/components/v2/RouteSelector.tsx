@@ -24,8 +24,16 @@ export function RouteSelector({
   const [hoveredStar, setHoveredStar] = useState<string | null>(null);
   const [hoveredLock, setHoveredLock] = useState<string | null>(null);
   
-  const displayedRoutes = showAllRoutes ? routes : routes.slice(0, 2);
-  const hiddenCount = routes.length - 2;
+  // Reorder routes to show selected first, then others
+  const reorderedRoutes = selectedRouteId
+    ? [
+        ...routes.filter(r => r.id === selectedRouteId),
+        ...routes.filter(r => r.id !== selectedRouteId)
+      ]
+    : routes;
+  
+  const displayedRoutes = showAllRoutes ? reorderedRoutes : reorderedRoutes.slice(0, 2);
+  const hiddenCount = reorderedRoutes.length - 2;
 
   const handleRefresh = () => {
     // Reset fade states
@@ -91,8 +99,10 @@ export function RouteSelector({
                   setShowAllRoutes(false);
                 }
               }}
-              className={`w-full bg-[#111213] rounded-[14px] p-[17px] space-y-2 transition-all duration-300 hover:bg-[#0F172A] ${
-                isSelected ? 'border-2 border-blue-600' : 'border-2 border-transparent'
+              className={`w-full rounded-[14px] p-[17px] space-y-2 transition-all duration-300 ${
+                isSelected 
+                  ? 'bg-[#0F172A] border-2 border-blue-600' 
+                  : 'bg-[#111213] hover:bg-[#0F172A] border-2 border-transparent'
               } ${isFadedIn ? 'opacity-100' : 'opacity-0'}`}
               style={{
                 transitionDelay: `${index * 50}ms`

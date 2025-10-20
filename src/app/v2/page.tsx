@@ -133,12 +133,18 @@ export default function V2Page() {
   const handleFromTokenChange = (token: Token) => {
     setFromToken(token);
     setEditMode('sell');
+    // Trigger routes refresh with new token
+    if (toToken && amount && parseFloat(amount) > 0) {
+      setTimeout(() => loadRoutes(false), 100);
+    }
   };
 
   const handleToTokenChange = (token: Token) => {
     setToToken(token);
+    // Trigger routes refresh with new token
     if (fromToken && amount && parseFloat(amount) > 0) {
-      setEditMode('sell'); // Trigger route fetch
+      setEditMode('sell');
+      setTimeout(() => loadRoutes(false), 100);
     }
   };
 
