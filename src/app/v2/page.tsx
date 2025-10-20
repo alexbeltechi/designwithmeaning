@@ -183,8 +183,8 @@ export default function V2Page() {
     <div className="min-h-screen bg-[#111213]">
       <Header hideIP={hideIP} onHideIPChange={setHideIP} />
       
-      <main className="w-full px-8 pb-20 pt-12">
-        <div className="max-w-[1143px] mx-auto flex flex-col items-center gap-12">
+      <main className="w-full px-8 pb-20 pt-6">
+        <div className="max-w-[1143px] mx-auto flex flex-col items-center gap-6">
           {/* Announcement Banner */}
           <p className="text-base text-gray-400 leading-6 tracking-[-0.3125px] text-center">
             📊 Total Llama swaps: $15.7M accross 18.2M transactions

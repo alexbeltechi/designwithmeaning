@@ -94,9 +94,7 @@ export function RouteSelector({
             >
               {/* Route Header */}
               <div className="flex items-center justify-between">
-                <p className={`text-xl font-medium leading-7 tracking-[-0.4395px] ${
-                  !isBestRoute && outputDiff < 0 ? 'text-red-400' : 'text-white'
-                }`}>
+                <p className="text-xl font-medium text-white leading-7 tracking-[-0.4395px]">
                   {route.outputAmount.toFixed(4)} {outputToken}
                 </p>
                 <div className="flex items-center gap-2">
@@ -129,16 +127,12 @@ export function RouteSelector({
               <div className="space-y-2">
                 {/* USD Value and Gas */}
                 <div className="flex items-start justify-between">
-                  <p className={`text-sm leading-5 tracking-[-0.1504px] ${
-                    !isBestRoute && outputDiff < 0 ? 'text-red-400' : 'text-gray-400'
-                  }`}>
+                  <p className="text-sm text-gray-400 leading-5 tracking-[-0.1504px]">
                     ≈${route.outputAmountUSD.toFixed(2)} after gas fees
                   </p>
                   <div className="flex items-center gap-1">
                     <Fuel className="w-4 h-4 text-zinc-500" />
-                    <span className={`text-sm leading-5 tracking-[-0.1504px] ${
-                      !isBestRoute && gasDiff > 0 ? 'text-red-400' : 'text-gray-400'
-                    }`}>
+                    <span className="text-sm text-gray-400 leading-5 tracking-[-0.1504px]">
                       ${route.gasUSD.toFixed(4)}
                     </span>
                   </div>
