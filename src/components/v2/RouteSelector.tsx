@@ -84,8 +84,14 @@ export function RouteSelector({
           return (
             <button
               key={route.id}
-              onClick={() => onSelectRoute(route.id)}
-              className={`w-full bg-slate-900 rounded-[14px] p-[17px] space-y-2 transition-all duration-300 hover:bg-[#111B31] ${
+              onClick={() => {
+                onSelectRoute(route.id);
+                // Collapse when selecting a route if expanded
+                if (showAllRoutes) {
+                  setShowAllRoutes(false);
+                }
+              }}
+              className={`w-full bg-[#111213] rounded-[14px] p-[17px] space-y-2 transition-all duration-300 hover:bg-[#0F172A] ${
                 isSelected ? 'border-2 border-blue-600' : 'border-2 border-transparent'
               } ${isFadedIn ? 'opacity-100' : 'opacity-0'}`}
               style={{
@@ -164,7 +170,7 @@ export function RouteSelector({
                     onMouseLeave={() => setHoveredStar(null)}
                   >
                     <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-                    <span className="text-sm text-slate-500 leading-5 tracking-[-0.1504px]">
+                    <span className="text-sm text-zinc-500 leading-5 tracking-[-0.1504px]">
                       {route.rating.toFixed(2)}
                     </span>
                     {hoveredStar === route.id && (
@@ -185,7 +191,7 @@ export function RouteSelector({
       {routes.length > 2 && (
         <button
           onClick={handleToggleRoutes}
-          className="w-full bg-slate-900 rounded-md px-4 py-2 flex items-center justify-center gap-2 hover:bg-slate-800 transition-colors"
+          className="w-full bg-[#111213] rounded-md px-4 py-2 flex items-center justify-center gap-2 hover:bg-[#0F172A] transition-colors"
         >
           <ChevronDown className={`w-[10.667px] h-[10.667px] text-white transition-transform ${showAllRoutes ? 'rotate-180' : ''}`} />
           <span className="text-sm font-medium text-white leading-6">

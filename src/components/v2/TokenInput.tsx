@@ -91,7 +91,7 @@ export function TokenInput({
   const textColor = isUserEdited ? 'text-white' : 'text-zinc-700';
 
   return (
-    <div className="bg-[#111213] rounded-xl p-4 space-y-4">
+    <div className="bg-[#111213] rounded-[10px] p-4 space-y-4">
       {/* Label */}
       <label className="block text-sm text-gray-400 leading-5">
         {label}

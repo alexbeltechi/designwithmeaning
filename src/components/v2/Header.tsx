@@ -16,7 +16,7 @@ export function Header({ hideIP, onHideIPChange }: HeaderProps) {
       <div className="max-w-[1143px] mx-auto flex items-center justify-center gap-2.5">
         {/* Logo and Name */}
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-[10px] flex items-center justify-center">
+          <div className="w-8 h-8 rounded-[10px] bg-blue-600 flex items-center justify-center">
             <span className="text-base font-medium text-white tracking-[-0.3125px]">🦙</span>
           </div>
           <h1 className="text-[20px] font-bold text-white leading-[28px] tracking-[-0.4492px]">
@@ -27,18 +27,18 @@ export function Header({ hideIP, onHideIPChange }: HeaderProps) {
         {/* Version Buttons */}
         <button
           onClick={() => router.push('/v1')}
-          className="h-12 px-4 rounded-[10px] text-gray-400 hover:text-white transition-colors text-base leading-6 tracking-[-0.3125px]"
+          className="h-10 px-4 rounded-[10px] text-gray-400 hover:text-white transition-colors text-base leading-6 tracking-[-0.3125px]"
         >
-          Version 1
+          V1
         </button>
         <button
-          className="h-12 px-4 rounded-[10px] bg-blue-600 hover:bg-blue-700 text-white transition-colors"
+          className="h-10 px-4 rounded-[10px] bg-blue-600 hover:bg-blue-700 text-white transition-colors"
         >
-          <span className="text-base font-medium leading-6 tracking-[-0.3125px]">Version 2</span>
+          <span className="text-base font-medium leading-6 tracking-[-0.3125px]">V2</span>
         </button>
 
         {/* Wallet Button */}
-        <button className="h-12 px-4 rounded-[10px] bg-[#1e1f24] hover:bg-[#2a2b30] text-white border-none transition-colors">
+        <button className="h-10 px-4 rounded-[10px] bg-[#1c1d21] hover:bg-[#2a2b30] text-white border-none transition-colors">
           <div className="flex items-center gap-2.5">
             <div className="w-6 h-6 rounded-full bg-gradient-to-br from-purple-400 to-pink-400" />
             <span className="text-base font-medium leading-6 tracking-[-0.3125px]">

@@ -106,7 +106,7 @@ export function SwapPanel({
   const showRoutes = amount && parseFloat(amount) > 0 && fromToken && toToken;
 
   return (
-    <div className="w-full bg-[#1e1f24] rounded-2xl p-4 space-y-4">
+    <div className="w-full bg-[#1c1d21] rounded-2xl p-4 space-y-4">
       {/* Chain Selector Header */}
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-semibold text-white leading-7">Chain</h2>
@@ -188,7 +188,7 @@ export function SwapPanel({
       <div className="flex justify-center -my-3 relative z-10">
         <button
           onClick={handleSwapTokens}
-          className="w-10 h-10 bg-[#111213] border-4 border-[#1e1f24] rounded-[10px] flex items-center justify-center hover:bg-[#1a1c1e] transition-colors"
+          className="w-10 h-10 bg-[#111213] border-4 border-[#1c1d21] rounded-[10px] flex items-center justify-center hover:bg-[#1a1c1e] transition-colors"
           disabled={!fromToken || !toToken}
         >
           <ArrowDownUp className="w-6 h-6 text-white" />
