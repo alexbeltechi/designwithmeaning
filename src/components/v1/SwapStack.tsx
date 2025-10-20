@@ -5,11 +5,11 @@ import { RefreshCw, Settings, Sun, Moon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
-import { SwapForm } from '@/components/SwapForm';
-import { RoutesSection } from '@/components/RoutesSection';
-import { ConfirmationDrawer } from '@/components/ConfirmationDrawer';
-import { TrustFooter } from '@/components/TrustFooter';
-import { Inputs, Route, getMockRoutes } from '@/lib/mockRoutes';
+import { SwapForm } from '@/components/v1/SwapForm';
+import { RoutesSection } from '@/components/v1/RoutesSection';
+import { ConfirmationDrawer } from '@/components/v1/ConfirmationDrawer';
+import { TrustFooter } from '@/components/v1/TrustFooter';
+import { Inputs, Route, getMockRoutes } from '@/lib/v1/mockRoutes';
 
 const STORAGE_KEYS = {
   SLIPPAGE: 'dwm-swap-slippage',

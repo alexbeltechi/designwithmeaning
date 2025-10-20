@@ -3,9 +3,9 @@
 import { Star, Check } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Route } from '@/lib/mockRoutes';
-import { formatCurrency, formatNumber, formatPercent } from '@/lib/format';
-import { HelpTip, HELP_CONTENT } from '@/components/HelpTip';
+import { Route } from '@/lib/v1/mockRoutes';
+import { formatCurrency, formatNumber, formatPercent } from '@/lib/v1/format';
+import { HelpTip, HELP_CONTENT } from '@/components/v1/HelpTip';
 
 interface RouteCardProps {
   route: Route;

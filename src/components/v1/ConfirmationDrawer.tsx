@@ -21,8 +21,8 @@ import {
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
-import { Route } from '@/lib/mockRoutes';
-import { formatCurrency, formatNumber, formatPercent } from '@/lib/format';
+import { Route } from '@/lib/v1/mockRoutes';
+import { formatCurrency, formatNumber, formatPercent } from '@/lib/v1/format';
 
 interface ConfirmationDrawerProps {
   open: boolean;

@@ -6,8 +6,8 @@ import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { RadioGroup } from '@/components/ui/radio-group';
-import { Route } from '@/lib/mockRoutes';
-import { RouteCard } from '@/components/RouteCard';
+import { Route } from '@/lib/v1/mockRoutes';
+import { RouteCard } from '@/components/v1/RouteCard';
 
 interface RoutesSectionProps {
   routes: Route[];

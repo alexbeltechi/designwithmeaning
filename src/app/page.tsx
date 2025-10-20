@@ -1,5 +1,5 @@
-import { SwapStack } from "@/components/SwapStack";
+import { redirect } from 'next/navigation';
 
 export default function Home() {
-  return <SwapStack />;
+  redirect('/v1');
 }

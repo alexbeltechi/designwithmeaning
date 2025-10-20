@@ -22,9 +22,9 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
-import { Inputs, MOCK_CHAINS, MOCK_TOKENS, Route } from '@/lib/mockRoutes';
-import { formatNumber } from '@/lib/format';
-import { HelpTip, HELP_CONTENT } from '@/components/HelpTip';
+import { Inputs, MOCK_CHAINS, MOCK_TOKENS, Route } from '@/lib/v1/mockRoutes';
+import { formatNumber } from '@/lib/v1/format';
+import { HelpTip, HELP_CONTENT } from '@/components/v1/HelpTip';
 
 interface SwapFormProps {
   onValidInputs: (inputs: Inputs) => void;
