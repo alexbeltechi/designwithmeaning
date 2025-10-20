@@ -21,6 +21,8 @@ export function RouteSelector({
 }: RouteSelectorProps) {
   const [showAllRoutes, setShowAllRoutes] = useState(false);
   const [fadeInStates, setFadeInStates] = useState<Record<string, boolean>>({});
+  const [hoveredStar, setHoveredStar] = useState<string | null>(null);
+  const [hoveredLock, setHoveredLock] = useState<string | null>(null);
   
   const displayedRoutes = showAllRoutes ? routes : routes.slice(0, 2);
   const hiddenCount = routes.length - 2;
@@ -44,6 +46,9 @@ export function RouteSelector({
   const handleToggleRoutes = () => {
     setShowAllRoutes(!showAllRoutes);
   };
+
+  // Find the best route to compare against
+  const bestRoute = routes.find(r => r.isBest) || routes[0];
 
   return (
     <div className="w-full space-y-4">
@@ -70,12 +75,17 @@ export function RouteSelector({
         {displayedRoutes.map((route, index) => {
           const isSelected = route.id === selectedRouteId;
           const isFadedIn = fadeInStates[route.id];
+          const isBestRoute = route.isBest;
+          
+          // Calculate differences from best route
+          const outputDiff = bestRoute ? ((route.outputAmount - bestRoute.outputAmount) / bestRoute.outputAmount * 100) : 0;
+          const gasDiff = bestRoute ? route.gasUSD - bestRoute.gasUSD : 0;
           
           return (
             <button
               key={route.id}
               onClick={() => onSelectRoute(route.id)}
-              className={`w-full bg-slate-900 rounded-[14px] p-[17px] space-y-2 transition-all duration-300 hover:bg-slate-800 ${
+              className={`w-full bg-slate-900 rounded-[14px] p-[17px] space-y-2 transition-all duration-300 hover:bg-[#111B31] ${
                 isSelected ? 'border-2 border-blue-600' : 'border-2 border-transparent'
               } ${isFadedIn ? 'opacity-100' : 'opacity-0'}`}
               style={{
@@ -84,7 +94,9 @@ export function RouteSelector({
             >
               {/* Route Header */}
               <div className="flex items-center justify-between">
-                <p className="text-xl font-medium text-white leading-7 tracking-[-0.4395px]">
+                <p className={`text-xl font-medium leading-7 tracking-[-0.4395px] ${
+                  !isBestRoute && outputDiff < 0 ? 'text-red-400' : 'text-white'
+                }`}>
                   {route.outputAmount.toFixed(4)} {outputToken}
                 </p>
                 <div className="flex items-center gap-2">
@@ -95,15 +107,20 @@ export function RouteSelector({
                   )}
                   {route.isFastest && !route.isBest && (
                     <div className="flex items-center gap-2">
-                      {route.percentDiff !== 0 && (
+                      {outputDiff !== 0 && (
                         <span className="text-xs text-red-400 leading-4">
-                          {route.percentDiff.toFixed(2)}%
+                          {outputDiff.toFixed(2)}%
                         </span>
                       )}
                       <div className="bg-zinc-600 rounded px-[5px] py-0.5">
                         <span className="text-xs text-white leading-4">FASTEST</span>
                       </div>
                     </div>
+                  )}
+                  {!route.isBest && !route.isFastest && outputDiff !== 0 && (
+                    <span className="text-xs text-red-400 leading-4">
+                      {outputDiff.toFixed(2)}%
+                    </span>
                   )}
                 </div>
               </div>
@@ -112,12 +129,16 @@ export function RouteSelector({
               <div className="space-y-2">
                 {/* USD Value and Gas */}
                 <div className="flex items-start justify-between">
-                  <p className="text-sm text-gray-400 leading-5 tracking-[-0.1504px]">
+                  <p className={`text-sm leading-5 tracking-[-0.1504px] ${
+                    !isBestRoute && outputDiff < 0 ? 'text-red-400' : 'text-gray-400'
+                  }`}>
                     ≈${route.outputAmountUSD.toFixed(2)} after gas fees
                   </p>
                   <div className="flex items-center gap-1">
                     <Fuel className="w-4 h-4 text-zinc-500" />
-                    <span className="text-sm text-gray-400 leading-5 tracking-[-0.1504px]">
+                    <span className={`text-sm leading-5 tracking-[-0.1504px] ${
+                      !isBestRoute && gasDiff > 0 ? 'text-red-400' : 'text-gray-400'
+                    }`}>
                       ${route.gasUSD.toFixed(4)}
                     </span>
                   </div>
@@ -126,18 +147,38 @@ export function RouteSelector({
                 {/* Protocol and Rating */}
                 <div className="flex items-center gap-2">
                   <div className="flex items-center gap-1.5">
-                    <div className="flex items-center gap-0.5 py-0.5">
+                    <div 
+                      className="relative flex items-center gap-0.5 py-0.5"
+                      onMouseEnter={() => setHoveredLock(route.id)}
+                      onMouseLeave={() => setHoveredLock(null)}
+                    >
                       <Lock className="w-4 h-4 text-slate-500" />
+                      {hoveredLock === route.id && (
+                        <div className="absolute bottom-full left-0 mb-2 px-3 py-2 bg-white text-gray-900 text-sm rounded-lg shadow-xl whitespace-nowrap z-50">
+                          Token is approved for this aggregator.
+                          <div className="absolute top-full left-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white"></div>
+                        </div>
+                      )}
                     </div>
                     <span className="text-sm text-blue-400 leading-5 tracking-[-0.1504px]">
                       {route.protocols.join(', ')}
                     </span>
                   </div>
-                  <div className="flex items-center gap-0.5">
+                  <div 
+                    className="relative flex items-center gap-0.5"
+                    onMouseEnter={() => setHoveredStar(route.id)}
+                    onMouseLeave={() => setHoveredStar(null)}
+                  >
                     <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
                     <span className="text-sm text-slate-500 leading-5 tracking-[-0.1504px]">
                       {route.rating.toFixed(2)}
                     </span>
+                    {hoveredStar === route.id && (
+                      <div className="absolute bottom-full right-0 mb-2 px-3 py-2 bg-white text-gray-900 text-sm rounded-lg shadow-xl whitespace-nowrap z-50 w-[280px]">
+                        Based on recent execution success rates for this route. 5 stars = highly reliable.
+                        <div className="absolute top-full right-8 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white"></div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

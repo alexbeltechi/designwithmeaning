@@ -97,6 +97,17 @@ export default function V2Page() {
     return () => clearTimeout(timeoutId);
   }, [loadRoutes, editMode]);
 
+  // Refresh routes when slippage changes
+  useEffect(() => {
+    if (editMode && amount && parseFloat(amount) > 0 && fromToken && toToken) {
+      // Add a slight delay to show loading animation
+      const timeoutId = setTimeout(() => {
+        loadRoutes(editMode === 'buy');
+      }, 300);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [slippage, editMode, amount, fromToken, toToken, loadRoutes]);
+
   const handleSellAmountChange = (value: string) => {
     setAmount(value);
     setEditMode('sell');
