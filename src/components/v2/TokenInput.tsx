@@ -125,7 +125,11 @@ export function TokenInput({
         <div className="relative" ref={dropdownRef}>
           <button
             onClick={() => setShowTokenDropdown(!showTokenDropdown)}
-            className="w-[140px] h-[40px] bg-zinc-800 rounded-[100px] pl-2 pr-[10px] flex items-center gap-2 hover:bg-zinc-700 transition-colors"
+            className={`w-[140px] h-[40px] rounded-[100px] pl-2 pr-[10px] flex items-center gap-2 transition-colors ${
+              selectedToken 
+                ? 'bg-zinc-800 hover:bg-zinc-700' 
+                : 'bg-blue-600 hover:bg-blue-700'
+            }`}
           >
             {selectedToken ? (
               <>

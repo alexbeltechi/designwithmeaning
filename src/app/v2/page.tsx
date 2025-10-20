@@ -165,15 +165,24 @@ export default function V2Page() {
 
   // Determine button text and state
   const getButtonState = () => {
-    if (!toToken) {
-      return { text: 'Select a token', disabled: true, className: 'bg-zinc-800 text-zinc-500 cursor-not-allowed' };
-    }
-    if (!amount || parseFloat(amount) <= 0) {
+    const hasValidAmount = amount && parseFloat(amount) > 0;
+    const hasValidOutputAmount = outputAmount && parseFloat(outputAmount) > 0;
+    
+    // Check if either sell or buy has an amount
+    if (!hasValidAmount && !hasValidOutputAmount) {
       return { text: 'Enter an amount', disabled: true, className: 'bg-zinc-800 text-zinc-500 cursor-not-allowed' };
     }
-    if (routes.length === 0) {
+    
+    // If amount is entered but no token selected
+    if ((hasValidAmount && !toToken) || (hasValidOutputAmount && !fromToken)) {
+      return { text: 'Choose a token', disabled: true, className: 'bg-zinc-800 text-zinc-500 cursor-not-allowed' };
+    }
+    
+    // If tokens selected but no valid routes
+    if (routes.length === 0 && fromToken && toToken) {
       return { text: 'No routes available', disabled: true, className: 'bg-zinc-800 text-zinc-500 cursor-not-allowed' };
     }
+    
     return { text: 'Swap', disabled: false, className: 'bg-blue-600 hover:bg-blue-700 text-white' };
   };
 
@@ -234,3 +243,4 @@ export default function V2Page() {
     </div>
   );
 }
+
