@@ -2,8 +2,8 @@ import { Shield, CheckCircle2, TrendingUp } from 'lucide-react';
 
 export function TrustFooter() {
   return (
-    <div className="mt-8 pt-6 border-t border-zinc-800">
-      <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs text-zinc-500">
+    <div className="mt-8 pt-6 border-t border-gray-800">
+      <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs text-slate-400">
         <div className="flex items-center gap-1.5">
           <Shield className="h-3.5 w-3.5 text-emerald-500" />
           <span>Route data aggregated by DeFiLlama</span>

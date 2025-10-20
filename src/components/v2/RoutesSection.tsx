@@ -3,8 +3,6 @@
 import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Switch } from '@/components/ui/switch';
-import { Label } from '@/components/ui/label';
 import { RadioGroup } from '@/components/ui/radio-group';
 import { Route } from '@/lib/v2/mockRoutes';
 import { RouteCard } from '@/components/v2/RouteCard';
@@ -30,30 +28,19 @@ export function RoutesSection({
   const bestRoute = routes[0]; // Already sorted by best
 
   return (
-    <div className="space-y-4" data-section="routes-section">
+    <div className="bg-[#1e1f24] p-4 rounded-[16px] shadow-[0px_16px_32px_0px_rgba(0,0,0,0.25)] space-y-4" data-section="routes-section">
       {/* Section Header */}
-      <div className="flex items-center justify-between">
-        <div className="space-y-1">
-          <h2 className="text-lg font-semibold text-white">
+      <div className="flex items-center justify-between h-8">
+        <div className="flex items-center gap-1">
+          <h2 className="text-lg font-semibold text-white leading-7">
             Select a Route
           </h2>
-          <p className="text-xs text-zinc-500">
-            Best route is selected based on <strong>net output after gas</strong>.
-          </p>
+          <div className="text-gray-400">ℹ️</div>
         </div>
         
-        <div className="flex items-center space-x-2" data-section="advanced-toggle">
-          <Switch
-            id="advanced-mode"
-            checked={viewMode === 'advanced'}
-            onCheckedChange={(checked) => onViewModeChange(checked ? 'advanced' : 'simple')}
-            data-component="shadcn-switch"
-            data-id="advanced-mode"
-          />
-          <Label htmlFor="advanced-mode" className="text-sm cursor-pointer text-zinc-400" data-component="shadcn-label">
-            Advanced
-          </Label>
-        </div>
+        <button className="p-0 h-8 w-8 flex items-center justify-center hover:bg-gray-800 rounded-[10px]">
+          <div className="text-white">⚙️</div>
+        </button>
       </div>
 
       {/* Routes - List Style (not grid) */}
@@ -78,7 +65,7 @@ export function RoutesSection({
           variant="outline"
           size="sm"
           onClick={() => setShowAll(!showAll)}
-          className="w-full bg-zinc-950 border-zinc-800 hover:bg-zinc-900"
+          className="w-full bg-transparent border-transparent hover:bg-gray-800/50 text-gray-400"
           data-component="shadcn-button"
           data-variant="outline"
           data-action="toggle-routes"

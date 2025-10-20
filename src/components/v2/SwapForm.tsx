@@ -83,12 +83,12 @@ export function SwapForm({ onValidInputs, slippagePct, onSlippageChange, selecte
   };
 
   return (
-    <Card className="p-6 space-y-4 bg-zinc-950 border-zinc-800" data-component="shadcn-card" data-section="swap-form">
+    <Card className="p-6 space-y-4 bg-[#1e1f24] border-transparent shadow-[0px_16px_32px_0px_rgba(0,0,0,0.25)]" data-component="shadcn-card" data-section="swap-form">
       {/* Chain Selector */}
       <div className="space-y-2" data-section="chain-selector">
-        <h2 className="text-sm font-medium text-zinc-400">Chain</h2>
+        <h2 className="text-lg font-semibold text-white">Chain</h2>
         <Select value={chain} onValueChange={setChain} data-component="shadcn-select" data-id="chain-select">
-          <SelectTrigger id="chain" className="w-full bg-zinc-900 border-zinc-800" data-component="shadcn-select-trigger">
+          <SelectTrigger id="chain" className="w-full bg-[#141618] border-transparent h-[46px]" data-component="shadcn-select-trigger">
             <SelectValue />
           </SelectTrigger>
           <SelectContent data-component="shadcn-select-content">
@@ -104,17 +104,17 @@ export function SwapForm({ onValidInputs, slippagePct, onSlippageChange, selecte
         </Select>
       </div>
 
-      {/* From Token - No "You sell" label */}
+      {/* From Token */}
       <div className="space-y-2" data-section="from-token">
         <div className="flex items-center justify-between">
-          <span className="text-sm font-medium text-zinc-400">From</span>
+          <span className="text-sm font-normal text-gray-400">You sell</span>
           {fromTokenData && (
-            <span className="text-xs text-zinc-500">
+            <span className="text-xs text-gray-400">
               Balance: {formatNumber(fromTokenData.balance, 4)}
               <Button
                 variant="ghost"
                 size="sm"
-                className="h-auto p-0 ml-1.5 text-xs text-blue-500 hover:text-blue-400"
+                className="h-auto p-0 ml-1.5 text-xs text-blue-400 hover:text-blue-300"
                 onClick={handleMaxClick}
                 data-component="shadcn-button"
                 data-variant="ghost"
@@ -125,20 +125,21 @@ export function SwapForm({ onValidInputs, slippagePct, onSlippageChange, selecte
             </span>
           )}
         </div>
-        <div className="flex gap-2">
+        <div className="bg-[#141618] rounded-xl p-4 space-y-2">
           <Input
             id="from-amount"
             type="number"
             placeholder="0.0"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            className="flex-1 text-2xl h-14 bg-zinc-900 border-zinc-800 font-semibold"
+            className="flex-1 text-4xl h-auto bg-transparent border-none font-normal p-0 focus-visible:ring-0 focus-visible:ring-offset-0"
             data-component="shadcn-input"
             data-type="number"
             data-size="lg"
           />
-          <Select value={fromToken} onValueChange={setFromToken} data-component="shadcn-select" data-id="from-token">
-            <SelectTrigger className="w-[140px] h-14 bg-zinc-900 border-zinc-800" data-component="shadcn-select-trigger" data-width="140px">
+          <div className="flex gap-3 items-center">
+            <Select value={fromToken} onValueChange={setFromToken} data-component="shadcn-select" data-id="from-token">
+            <SelectTrigger className="w-[160px] h-[42px] bg-zinc-800 border-transparent rounded-[10px]" data-component="shadcn-select-trigger" data-width="160px">
               <SelectValue />
             </SelectTrigger>
             <SelectContent data-component="shadcn-select-content">
@@ -152,53 +153,55 @@ export function SwapForm({ onValidInputs, slippagePct, onSlippageChange, selecte
               ))}
             </SelectContent>
           </Select>
+          </div>
+          {fromTokenData && amount && parseFloat(amount) > 0 && (
+            <p className="text-sm text-gray-400">
+              ~${formatNumber(parseFloat(amount) * 3782.5, 2)}
+            </p>
+          )}
         </div>
-        {fromTokenData && amount && parseFloat(amount) > 0 && (
-          <p className="text-xs text-zinc-500">
-            ≈ ${formatNumber(parseFloat(amount) * 3782.5, 2)}
-          </p>
-        )}
       </div>
 
       {/* Flip Button */}
-      <div className="flex justify-center -my-2" data-section="flip-button">
+      <div className="flex justify-center -my-3" data-section="flip-button">
         <Button
           variant="outline"
           size="sm"
           onClick={handleFlip}
-          className="rounded-full h-10 w-10 p-0 bg-zinc-900 border-zinc-800 hover:bg-zinc-800"
+          className="rounded-[10px] h-10 w-10 p-0 bg-[#141618] border-4 border-[#1e1f24] hover:bg-[#1a1c1e]"
           data-component="shadcn-button"
           data-variant="outline"
-          data-shape="rounded-full"
+          data-shape="square"
         >
-          <ArrowDownUp className="h-4 w-4" />
+          <ArrowDownUp className="h-5 w-5" />
         </Button>
       </div>
 
-      {/* To Token - No "You buy" label */}
+      {/* To Token */}
       <div className="space-y-2" data-section="to-token">
         <div className="flex items-center justify-between">
-          <span className="text-sm font-medium text-zinc-400">To</span>
+          <span className="text-sm font-normal text-gray-400">You buy</span>
           {toTokenData && (
-            <span className="text-xs text-zinc-500">
+            <span className="text-xs text-gray-400">
               Balance: {formatNumber(toTokenData.balance, 2)}
             </span>
           )}
         </div>
-        <div className="flex gap-2">
+        <div className="bg-[#141618] rounded-xl p-4 space-y-2">
           <Input
             id="to-amount"
             type="text"
             value={selectedRoute ? formatNumber(selectedRoute.outputAmount, 2) : ''}
             readOnly
             placeholder="0.0"
-            className="flex-1 text-2xl h-14 bg-zinc-900/50 border-zinc-800 font-semibold"
+            className="flex-1 text-4xl h-auto bg-transparent border-none font-normal p-0 focus-visible:ring-0 focus-visible:ring-offset-0"
             data-component="shadcn-input"
             data-state="readonly"
             data-size="lg"
           />
-          <Select value={toToken} onValueChange={setToToken} data-component="shadcn-select" data-id="to-token">
-            <SelectTrigger className="w-[140px] h-14 bg-zinc-900 border-zinc-800" data-component="shadcn-select-trigger" data-width="140px">
+          <div className="flex gap-3 items-center">
+            <Select value={toToken} onValueChange={setToToken} data-component="shadcn-select" data-id="to-token">
+            <SelectTrigger className="w-[160px] h-[42px] bg-zinc-800 border-transparent rounded-[10px]" data-component="shadcn-select-trigger" data-width="160px">
               <SelectValue />
             </SelectTrigger>
             <SelectContent data-component="shadcn-select-content">
@@ -212,55 +215,45 @@ export function SwapForm({ onValidInputs, slippagePct, onSlippageChange, selecte
               ))}
             </SelectContent>
           </Select>
+          </div>
+          {selectedRoute && (
+            <p className="text-sm text-gray-400">
+              ~${formatNumber(selectedRoute.outputFiat, 2)}
+            </p>
+          )}
         </div>
-        {selectedRoute && (
-          <p className="text-xs text-zinc-500">
-            ≈ ${formatNumber(selectedRoute.outputFiat, 2)}
-          </p>
-        )}
       </div>
 
-      {/* Slippage Controls - Pill Style at Bottom */}
-      <div className="pt-4 space-y-3 border-t border-zinc-800" data-section="slippage-controls">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1.5">
-            <span className="text-sm font-medium text-zinc-400">Slippage tolerance</span>
-            <HelpTip content={HELP_CONTENT.slippage} />
-          </div>
-        </div>
+      {/* Slippage Controls */}
+      <div className="space-y-3" data-section="slippage-controls">
+        <p className="text-base font-normal text-white">Slippage (%)</p>
         <div className="flex gap-2">
           {SLIPPAGE_PRESETS.map((preset) => (
             <Button
               key={preset}
-              variant={slippagePct === preset && !customSlippage ? 'default' : 'outline'}
+              variant="ghost"
               size="sm"
               onClick={() => handleSlippagePreset(preset)}
-              className={`flex-1 rounded-full ${
+              className={`flex-1 h-9 rounded-[10px] border-none ${
                 slippagePct === preset && !customSlippage
-                  ? 'bg-blue-600 hover:bg-blue-700 text-white border-blue-600'
-                  : 'bg-zinc-900 border-zinc-800 hover:bg-zinc-800'
+                  ? 'bg-[#141618] text-white hover:bg-[#1a1c1e]'
+                  : 'bg-[#313236] text-white hover:bg-[#3a3c41]'
               }`}
               data-component="shadcn-button"
-              data-variant={slippagePct === preset && !customSlippage ? 'default' : 'outline'}
               data-type="slippage-preset"
             >
-              {preset}%
+              {preset}
             </Button>
           ))}
-          <div className="relative flex-1">
-            <Input
-              type="number"
-              placeholder="Custom"
-              value={customSlippage}
-              onChange={(e) => handleCustomSlippage(e.target.value)}
-              className="pr-6 h-9 rounded-full bg-zinc-900 border-zinc-800"
-              data-component="shadcn-input"
-              data-type="custom-slippage"
-            />
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-zinc-500">
-              %
-            </span>
-          </div>
+          <Input
+            type="number"
+            placeholder="Custom"
+            value={customSlippage}
+            onChange={(e) => handleCustomSlippage(e.target.value)}
+            className="flex-1 h-9 rounded-[10px] bg-[#313236] border-transparent text-center text-white placeholder:text-gray-500"
+            data-component="shadcn-input"
+            data-type="custom-slippage"
+          />
         </div>
         {slippagePct > 1 && (
           <p className="text-xs text-amber-500">

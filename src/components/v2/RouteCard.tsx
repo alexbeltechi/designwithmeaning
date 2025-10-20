@@ -1,11 +1,9 @@
 'use client';
 
-import { Check, ExternalLink } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Route } from '@/lib/v2/mockRoutes';
 import { formatCurrency, formatNumber, formatPercent } from '@/lib/v2/format';
-import { HelpTip, HELP_CONTENT } from '@/components/v2/HelpTip';
 
 interface RouteCardProps {
   route: Route;
@@ -26,8 +24,10 @@ export function RouteCard({
 
   return (
     <Card
-      className={`relative cursor-pointer transition-all hover:border-blue-600/50 bg-zinc-950 border-zinc-800 ${
-        isSelected ? 'border-blue-600 border-2 shadow-lg shadow-blue-600/20' : ''
+      className={`relative cursor-pointer transition-all hover:border-blue-600/30 border-transparent rounded-[14px] ${
+        isSelected 
+          ? 'bg-slate-900 border-blue-600 border-2' 
+          : 'bg-transparent border-transparent'
       }`}
       onClick={onSelect}
       data-component="shadcn-card"
@@ -35,87 +35,70 @@ export function RouteCard({
       data-state={isSelected ? 'selected' : 'default'}
       data-is-best={isBest}
     >
-      <div className="p-4 space-y-3">
-        {/* Header Row: Aggregator + Badges + Checkmark */}
+      <div className="p-[17px] space-y-2">
+        {/* Header Row: Output Amount + Badges */}
         <div className="flex items-center justify-between">
+          <p className="text-xl font-medium text-white leading-7">
+            {formatNumber(route.outputAmount, 2)} USDC
+          </p>
           <div className="flex items-center gap-2">
-            {/* Aggregator Name as Link */}
-            <a 
-              href="#" 
-              className="text-base font-semibold text-blue-500 hover:text-blue-400 flex items-center gap-1"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {route.aggregator}
-              <ExternalLink className="h-3 w-3" />
-            </a>
-            
-            {/* Badges */}
+            {/* Reliability Score with Lock Icon */}
             {isBest && (
-              <Badge className="bg-emerald-600 text-white text-xs px-2 py-0.5" data-component="shadcn-badge" data-variant="best">
+              <div className="flex items-center gap-1">
+                <div className="text-green-600">🔒</div>
+                <p className="text-sm font-normal text-white">{reliabilityScore}</p>
+              </div>
+            )}
+            {/* BEST Badge */}
+            {isBest && (
+              <Badge className="bg-blue-600 text-white text-xs px-[5px] py-[1px] rounded-[4px] font-normal leading-4" data-component="shadcn-badge" data-variant="best">
                 BEST
               </Badge>
             )}
+            {/* Other Badges */}
             {route.badges && route.badges.filter(b => b !== 'BEST').map((badge) => (
               <Badge
                 key={badge}
-                variant="secondary"
-                className={
-                  badge === 'LOW_GAS'
-                    ? 'bg-blue-600/90 text-white text-xs px-2 py-0.5'
-                    : badge === 'FAST'
-                    ? 'bg-orange-600/90 text-white text-xs px-2 py-0.5'
-                    : badge === 'MEV_PROTECTED'
-                    ? 'bg-purple-600/90 text-white text-xs px-2 py-0.5'
-                    : 'text-xs px-2 py-0.5'
-                }
+                className="bg-zinc-600 text-white text-xs px-[5px] py-[1px] rounded-[4px] font-normal leading-4"
                 data-component="shadcn-badge"
                 data-variant={badge.toLowerCase().replace('_', '-')}
               >
-                {badge.replace('_', ' ')}
+                {badge === 'FAST' ? 'FASTEST' : badge.replace('_', ' ')}
               </Badge>
             ))}
+            {/* Percentage Difference (if not best) */}
+            {!isBest && (
+              <div className="rounded-[4px] px-[5px] py-[1px]">
+                <p className="text-xs font-normal text-red-400 leading-4">-0.00%</p>
+              </div>
+            )}
           </div>
+        </div>
 
-          {/* Checkmark for Selected */}
-          {isSelected && (
-            <div className="flex-shrink-0">
-              <Check className="h-5 w-5 text-blue-500" />
+        {/* After Gas + Provider Info */}
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <p className="text-sm font-normal text-slate-400 leading-5">
+              ≈{formatCurrency(route.outputFiat)} after gas fees
+            </p>
+            <div className="flex items-center gap-1 text-sm">
+              <span className="text-slate-400">💰 {formatCurrency(route.gasUSD)} via</span>
+              <a 
+                href="#" 
+                className="text-blue-400 hover:text-blue-300 font-normal"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {route.aggregator}
+              </a>
             </div>
+          </div>
+          {/* Description for BEST route */}
+          {isBest && (
+            <p className="text-sm font-normal text-slate-500 leading-5">
+              {route.description}
+            </p>
           )}
         </div>
-
-        {/* Output Amount Row */}
-        <div className="flex items-baseline gap-3">
-          <span className="text-2xl font-bold text-white">
-            {formatNumber(route.outputAmount, 2)}
-          </span>
-          <span className="text-sm text-zinc-500">
-            USDC
-          </span>
-          <span className="text-sm text-emerald-500 font-medium">
-            ≈ {formatCurrency(route.outputFiat)} after gas
-          </span>
-        </div>
-
-        {/* Numeric Reliability Score */}
-        <div className="flex items-center gap-4 text-sm">
-          <div className="flex items-center gap-1.5">
-            <span className="text-zinc-400">Reliability:</span>
-            <span className="font-semibold text-emerald-500">{reliabilityScore}/100</span>
-            <HelpTip content={HELP_CONTENT.reliability} />
-          </div>
-          
-          {/* Gas Cost */}
-          <div className="flex items-center gap-1.5">
-            <span className="text-zinc-400">Gas:</span>
-            <span className="font-medium text-white">{formatCurrency(route.gasUSD)}</span>
-          </div>
-        </div>
-
-        {/* Description */}
-        <p className="text-xs text-zinc-500 leading-relaxed">
-          {route.description}
-        </p>
 
         {/* Advanced Meta */}
         {viewMode === 'advanced' && (

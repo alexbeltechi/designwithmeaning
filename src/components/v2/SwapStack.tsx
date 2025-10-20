@@ -121,7 +121,7 @@ export function SwapStack() {
   const selectedRoute = routes.find((r) => r.id === selectedRouteId) || null;
 
   return (
-    <div className="min-h-screen bg-black" data-component="swap-stack">
+    <div className="min-h-screen bg-[#141618]" data-component="swap-stack">
       <div className="max-w-7xl mx-auto p-4 md:p-6">
         {/* Header */}
         <div className="space-y-4 mb-8" data-section="header">
@@ -199,7 +199,7 @@ export function SwapStack() {
         </div>
 
         {/* Two-Column Layout: Swap Form (Left) | Routes (Right) on Desktop */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Left Column: Swap Form */}
           <div className="space-y-6">
             <SwapForm
@@ -213,7 +213,7 @@ export function SwapStack() {
             {routes.length > 0 && selectedRoute && !loading && (
               <Button
                 size="lg"
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white h-14 text-lg font-semibold"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white h-12 text-base font-medium rounded-[10px]"
                 onClick={handleSwap}
                 data-component="shadcn-button"
                 data-variant="default"
@@ -246,9 +246,9 @@ export function SwapStack() {
             {/* Loading State */}
             {loading && (
               <div className="space-y-3" data-section="loading-state">
-                <div className="h-[180px] rounded-lg border border-zinc-800 bg-zinc-950 animate-pulse" data-component="skeleton" />
-                <div className="h-[180px] rounded-lg border border-zinc-800 bg-zinc-950 animate-pulse" data-component="skeleton" />
-                <div className="h-[180px] rounded-lg border border-zinc-800 bg-zinc-950 animate-pulse" data-component="skeleton" />
+                <div className="h-[180px] rounded-[14px] bg-[#1e1f24]/50 animate-pulse" data-component="skeleton" />
+                <div className="h-[180px] rounded-[14px] bg-[#1e1f24]/50 animate-pulse" data-component="skeleton" />
+                <div className="h-[180px] rounded-[14px] bg-[#1e1f24]/50 animate-pulse" data-component="skeleton" />
               </div>
             )}
           </div>
