@@ -95,7 +95,7 @@ export function TokenInput({
   const [isFocused, setIsFocused] = useState(false);
 
   return (
-    <div className={`bg-[#111213] rounded-[10px] p-4 space-y-4 border transition-colors ${
+    <div className={`bg-[#111213] rounded-[10px] p-4 space-y-2 border transition-colors ${
       isFocused ? 'border-white' : 'border-transparent'
     }`}>
       {/* Label */}

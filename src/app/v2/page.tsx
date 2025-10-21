@@ -168,14 +168,14 @@ export default function V2Page() {
 
   const selectedRoute = routes.find(r => r.id === selectedRouteId);
 
-  // Calculate USD values
+  // Calculate USD values - hide when amount is 0
   const fromUsdValue = amount && fromToken && parseFloat(amount) > 0
     ? `~$${(parseFloat(amount) * fromTokenPrice).toFixed(2)}`
-    : '~$0.00';
+    : '';
 
   const toUsdValue = outputAmount && toToken && parseFloat(outputAmount) > 0
     ? `~$${(parseFloat(outputAmount) * toTokenPrice).toFixed(2)}`
-    : '~$0.00';
+    : '';
 
   const handleSwap = () => {
     if (!selectedRoute || !fromToken || !toToken) return;
@@ -190,17 +190,17 @@ export default function V2Page() {
     
     // Check if either sell or buy has an amount
     if (!hasValidAmount && !hasValidOutputAmount) {
-      return { text: 'Enter an amount', disabled: true, className: 'bg-zinc-800 text-zinc-500 cursor-not-allowed' };
+      return { text: 'Enter an amount', disabled: true, className: 'bg-[#0F172A] text-white text-opacity-40 cursor-not-allowed' };
     }
     
     // If amount is entered but no token selected
     if ((hasValidAmount && !toToken) || (hasValidOutputAmount && !fromToken)) {
-      return { text: 'Choose a token', disabled: true, className: 'bg-zinc-800 text-zinc-500 cursor-not-allowed' };
+      return { text: 'Choose a token', disabled: true, className: 'bg-[#0F172A] text-white text-opacity-40 cursor-not-allowed' };
     }
     
     // If tokens selected but no valid routes
     if (routes.length === 0 && fromToken && toToken) {
-      return { text: 'No routes available', disabled: true, className: 'bg-zinc-800 text-zinc-500 cursor-not-allowed' };
+      return { text: 'No routes available', disabled: true, className: 'bg-[#0F172A] text-white text-opacity-40 cursor-not-allowed' };
     }
     
     return { text: 'Swap', disabled: false, className: 'bg-blue-600 hover:bg-blue-700 text-white' };
@@ -246,15 +246,6 @@ export default function V2Page() {
               isSellUserEdited={isSellUserEdited}
             />
 
-            {/* Swap Button */}
-            <Button
-              onClick={handleSwap}
-              disabled={buttonState.disabled}
-              className={`w-full h-12 rounded-[10px] text-base font-medium leading-6 tracking-[-0.3125px] transition-colors ${buttonState.className}`}
-            >
-              {buttonState.text}
-            </Button>
-
             {/* Route Selector - Outside gray card on plain background */}
             {showRoutes && (
               <>
@@ -279,6 +270,15 @@ export default function V2Page() {
                 ) : null}
               </>
             )}
+
+            {/* Swap Button - After routes section */}
+            <Button
+              onClick={handleSwap}
+              disabled={buttonState.disabled}
+              className={`w-full h-12 rounded-[10px] text-base font-medium leading-6 tracking-[-0.3125px] transition-colors ${buttonState.className}`}
+            >
+              {buttonState.text}
+            </Button>
           </div>
         </div>
       </main>

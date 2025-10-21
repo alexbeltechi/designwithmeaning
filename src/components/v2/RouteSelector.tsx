@@ -105,7 +105,7 @@ export function RouteSelector({
               className={`w-full rounded-[14px] p-[17px] space-y-2 transition-all duration-300 ${
                 isSelected 
                   ? 'bg-[#0F172A] border-2 border-blue-600' 
-                  : 'bg-[#111213] hover:bg-[#0F172A] border-2 border-transparent'
+                  : 'bg-[#1C1D21] hover:bg-[#0F172A] border-2 border-transparent'
               } ${isFadedIn ? 'opacity-100' : 'opacity-0'}`}
               style={{
                 transitionDelay: `${index * 50}ms`
