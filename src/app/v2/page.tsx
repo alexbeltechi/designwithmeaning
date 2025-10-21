@@ -190,17 +190,17 @@ export default function V2Page() {
     
     // Check if either sell or buy has an amount
     if (!hasValidAmount && !hasValidOutputAmount) {
-      return { text: 'Enter an amount', disabled: true, className: 'bg-[#0F172A] text-white text-opacity-40 cursor-not-allowed' };
+      return { text: 'Enter an amount', disabled: true, className: 'bg-[#1E3A8A] text-white text-opacity-40 cursor-not-allowed' };
     }
     
     // If amount is entered but no token selected
     if ((hasValidAmount && !toToken) || (hasValidOutputAmount && !fromToken)) {
-      return { text: 'Choose a token', disabled: true, className: 'bg-[#0F172A] text-white text-opacity-40 cursor-not-allowed' };
+      return { text: 'Choose a token', disabled: true, className: 'bg-[#1E3A8A] text-white text-opacity-40 cursor-not-allowed' };
     }
     
     // If tokens selected but no valid routes
     if (routes.length === 0 && fromToken && toToken) {
-      return { text: 'No routes available', disabled: true, className: 'bg-[#0F172A] text-white text-opacity-40 cursor-not-allowed' };
+      return { text: 'No routes available', disabled: true, className: 'bg-[#1E3A8A] text-white text-opacity-40 cursor-not-allowed' };
     }
     
     return { text: 'Swap', disabled: false, className: 'bg-blue-600 hover:bg-blue-700 text-white' };

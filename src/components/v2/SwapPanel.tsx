@@ -157,21 +157,36 @@ export function SwapPanel({
       </div>
 
       {/* Token Inputs with Overlapping Swap Button */}
-      <div className="relative space-y-1">
-        <TokenInput
-          label="You sell"
-          value={amount}
-          onChange={onAmountChange}
-          selectedToken={fromToken}
-          onTokenSelect={onFromTokenChange}
-          availableTokens={availableTokens.filter(t => t.symbol !== toToken?.symbol)}
-          usdValue={fromUsdValue}
-          isUserEdited={isSellUserEdited}
-          onUserEdit={() => {}}
-        />
+      <div className="relative">
+        <div className="space-y-1">
+          <TokenInput
+            label="You sell"
+            value={amount}
+            onChange={onAmountChange}
+            selectedToken={fromToken}
+            onTokenSelect={onFromTokenChange}
+            availableTokens={availableTokens.filter(t => t.symbol !== toToken?.symbol)}
+            usdValue={fromUsdValue}
+            isUserEdited={isSellUserEdited}
+            onUserEdit={() => {}}
+          />
 
-        {/* Swap Button - Centered between boxes */}
-        <div className="relative flex justify-center -my-[18px] z-10">
+          <TokenInput
+            label="You buy"
+            value={outputAmount}
+            onChange={onOutputAmountChange}
+            selectedToken={toToken}
+            onTokenSelect={onToTokenChange}
+            availableTokens={availableTokens.filter(t => t.symbol !== fromToken?.symbol)}
+            usdValue={toUsdValue}
+            placeholder="Select token"
+            isUserEdited={isBuyUserEdited}
+            onUserEdit={() => {}}
+          />
+        </div>
+
+        {/* Swap Button - Absolutely centered between boxes */}
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
           <button
             onClick={handleSwapTokens}
             className="w-10 h-10 bg-[#111213] border-4 border-[#1c1d21] rounded-[10px] flex items-center justify-center hover:bg-[#1a1c1e] transition-colors"
@@ -180,19 +195,6 @@ export function SwapPanel({
             <ArrowDownUp className="w-6 h-6 text-white" />
           </button>
         </div>
-
-        <TokenInput
-          label="You buy"
-          value={outputAmount}
-          onChange={onOutputAmountChange}
-          selectedToken={toToken}
-          onTokenSelect={onToTokenChange}
-          availableTokens={availableTokens.filter(t => t.symbol !== fromToken?.symbol)}
-          usdValue={toUsdValue}
-          placeholder="Select token"
-          isUserEdited={isBuyUserEdited}
-          onUserEdit={() => {}}
-        />
       </div>
 
       {/* Slippage Controls */}

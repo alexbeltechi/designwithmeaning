@@ -182,9 +182,9 @@ export function TokenInput({
         </div>
       </div>
 
-      {/* USD Value */}
-      <div className="text-sm text-gray-400 leading-5 tracking-[-0.1504px]">
-        {usdValue}
+      {/* USD Value - Reserve space even when empty */}
+      <div className="text-sm text-gray-400 leading-5 tracking-[-0.1504px] min-h-[20px]">
+        {usdValue || '\u00A0'}
       </div>
     </div>
   );
