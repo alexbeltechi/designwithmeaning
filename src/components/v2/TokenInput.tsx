@@ -89,8 +89,8 @@ export function TokenInput({
 
   const displayValue = value || '0';
   
-  // Color logic: zinc-700 if not user edited (calculated), white if user edited
-  const textColor = isUserEdited ? 'text-white' : 'text-zinc-700';
+  // Color logic: zinc-600 if not user edited (calculated), white if user edited
+  const textColor = isUserEdited ? 'text-white' : 'text-zinc-600';
 
   const [isFocused, setIsFocused] = useState(false);
 

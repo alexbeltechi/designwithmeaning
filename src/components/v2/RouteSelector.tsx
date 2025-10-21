@@ -114,10 +114,10 @@ export function RouteSelector({
                   setShowAllRoutes(false);
                 }
               }}
-              className={`w-full rounded-[14px] p-[17px] space-y-2 transition-all duration-300 border ${
+              className={`w-full rounded-[14px] space-y-2 transition-all duration-300 ${
                 isSelected 
-                  ? 'bg-[#0F172A] border-[2px] border-blue-600' 
-                  : 'bg-zinc-800 hover:bg-[#0F172A] border-white/10 hover:border-white/10'
+                  ? 'bg-[#0F172A] border-2 border-blue-600 p-[17px]' 
+                  : 'bg-zinc-800 hover:bg-[#0F172A] border-t border-white/10 border-x-2 border-x-transparent border-b-2 border-b-transparent p-[17px]'
               } ${isFadedIn ? 'opacity-100' : 'opacity-0'}`}
               style={{
                 transitionDelay: `${index * 50}ms`
