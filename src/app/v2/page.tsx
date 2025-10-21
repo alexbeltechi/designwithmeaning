@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Header } from '@/components/v2/Header';
 import { SwapPanel } from '@/components/v2/SwapPanel';
+import { RouteSelector } from '@/components/v2/RouteSelector';
 import { Button } from '@/components/ui/button';
 import { fetchSwapRoutes, SwapRoute, getBestRoute } from '@/lib/v2/defillamaApi';
 import { Token, Chain, AVAILABLE_TOKENS, AVAILABLE_CHAINS, getTokenPrice } from '@/lib/v2/tokens';
@@ -207,11 +208,13 @@ export default function V2Page() {
 
   const buttonState = getButtonState();
 
+  const showRoutes = amount && parseFloat(amount) > 0 && fromToken && toToken;
+
   return (
     <div className="min-h-screen bg-[#111213]">
       <Header hideIP={hideIP} onHideIPChange={setHideIP} onLogoClick={handleLogoClick} />
       
-      <main className="w-full px-8 pb-20 pt-6">
+      <main className="w-full px-4 md:px-8 pb-20 pt-6">
         <div className="max-w-[1143px] mx-auto flex flex-col items-center gap-6">
           {/* Announcement Banner */}
           <p className="text-base text-gray-400 leading-6 tracking-[-0.3125px] text-center">
@@ -237,15 +240,10 @@ export default function V2Page() {
               toUsdValue={toUsdValue}
               slippage={slippage}
               onSlippageChange={setSlippage}
-              routes={routes}
-              selectedRouteId={selectedRouteId}
-              onSelectRoute={setSelectedRouteId}
-              loading={loading}
               hideIP={hideIP}
               onHideIPChange={setHideIP}
               isBuyUserEdited={isBuyUserEdited}
               isSellUserEdited={isSellUserEdited}
-              onRefresh={handleRefresh}
             />
 
             {/* Swap Button */}
@@ -256,6 +254,31 @@ export default function V2Page() {
             >
               {buttonState.text}
             </Button>
+
+            {/* Route Selector - Outside gray card on plain background */}
+            {showRoutes && (
+              <>
+                {loading ? (
+                  <div className="space-y-2 pt-4">
+                    <div className="flex items-center justify-between h-8">
+                      <div className="h-6 w-32 bg-zinc-800 rounded animate-pulse" />
+                    </div>
+                    <div className="h-[180px] bg-slate-900 rounded-[14px] animate-pulse" />
+                    <div className="h-[180px] bg-slate-900 rounded-[14px] animate-pulse" />
+                  </div>
+                ) : routes.length > 0 ? (
+                  <div className="pt-2">
+                    <RouteSelector
+                      routes={routes}
+                      selectedRouteId={selectedRouteId}
+                      onSelectRoute={setSelectedRouteId}
+                      outputToken={toToken?.symbol || ''}
+                      onRefresh={handleRefresh}
+                    />
+                  </div>
+                ) : null}
+              </>
+            )}
           </div>
         </div>
       </main>

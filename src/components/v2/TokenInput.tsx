@@ -63,6 +63,7 @@ export function TokenInput({
   const handleAmountClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!readOnly && selectedToken) {
       setIsEditing(true);
+      setIsFocused(true);
       if (onUserEdit) {
         onUserEdit();
       }
@@ -83,6 +84,7 @@ export function TokenInput({
 
   const handleInputBlur = () => {
     setIsEditing(false);
+    setIsFocused(false);
   };
 
   const displayValue = value || '0';
@@ -90,8 +92,12 @@ export function TokenInput({
   // Color logic: zinc-700 if not user edited (calculated), white if user edited
   const textColor = isUserEdited ? 'text-white' : 'text-zinc-700';
 
+  const [isFocused, setIsFocused] = useState(false);
+
   return (
-    <div className="bg-[#111213] rounded-[10px] p-4 space-y-4">
+    <div className={`bg-[#111213] rounded-[10px] p-4 space-y-4 border transition-colors ${
+      isFocused ? 'border-white' : 'border-transparent'
+    }`}>
       {/* Label */}
       <label className="block text-sm text-gray-400 leading-5">
         {label}
@@ -100,7 +106,7 @@ export function TokenInput({
       {/* Amount and Token Selector */}
       <div className="flex items-center gap-3 h-[42px]">
         {/* Amount Display/Input */}
-        <div className="flex-1 relative" onClick={handleAmountClick}>
+        <div className="flex-1 relative overflow-hidden" onClick={handleAmountClick}>
           {isEditing ? (
             <input
               ref={inputRef}
@@ -110,11 +116,16 @@ export function TokenInput({
               onBlur={handleInputBlur}
               className={`w-full bg-transparent border-none outline-none text-[30px] font-semibold leading-9 tracking-[-0.225px] ${textColor} p-0`}
               placeholder="0"
+              style={{ minHeight: '36px' }}
             />
           ) : (
             <p 
-              className={`text-[30px] font-semibold leading-9 tracking-[-0.225px] ${textColor} cursor-text select-none`}
-              style={{ minHeight: '36px' }}
+              className={`text-[30px] font-semibold leading-9 tracking-[-0.225px] ${textColor} cursor-text select-none overflow-x-auto scrollbar-hide`}
+              style={{ 
+                minHeight: '36px',
+                whiteSpace: 'nowrap',
+                WebkitOverflowScrolling: 'touch'
+              }}
             >
               {displayValue}
             </p>
