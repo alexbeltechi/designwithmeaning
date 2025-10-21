@@ -1,5 +1,6 @@
 'use client';
 
+// SwapPanel component
 import { useState, useRef, useEffect } from 'react';
 import { ChevronDown, ArrowDownUp, Settings } from 'lucide-react';
 import { TokenInput } from './TokenInput';
