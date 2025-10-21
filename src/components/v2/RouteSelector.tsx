@@ -23,6 +23,7 @@ export function RouteSelector({
   const [fadeInStates, setFadeInStates] = useState<Record<string, boolean>>({});
   const [hoveredStar, setHoveredStar] = useState<string | null>(null);
   const [hoveredLock, setHoveredLock] = useState<string | null>(null);
+  const [showHeaderTooltip, setShowHeaderTooltip] = useState(false);
   
   // Find if selected route is in top 2
   const selectedIndex = routes.findIndex(r => r.id === selectedRouteId);
@@ -65,13 +66,24 @@ export function RouteSelector({
     <div className="w-full space-y-4">
       {/* Section Header */}
       <div className="flex items-center justify-between h-8">
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 relative">
           <h3 className="text-lg font-semibold text-white leading-7">
             Select a Route
           </h3>
-          <button className="w-4 h-4 text-zinc-500 hover:text-zinc-400">
+          <button 
+            className="w-4 h-4 text-zinc-500 hover:text-zinc-400"
+            onMouseEnter={() => setShowHeaderTooltip(true)}
+            onMouseLeave={() => setShowHeaderTooltip(false)}
+          >
             <HelpCircle className="w-4 h-4" />
           </button>
+          
+          {/* Tooltip */}
+          {showHeaderTooltip && (
+            <div className="absolute top-full left-0 mt-2 px-3 py-2 bg-zinc-900 text-white text-sm rounded-lg shadow-xl z-50 whitespace-nowrap">
+              Best route is selected based on net output after gas fees.
+            </div>
+          )}
         </div>
         <button 
           onClick={handleRefresh}
@@ -102,10 +114,10 @@ export function RouteSelector({
                   setShowAllRoutes(false);
                 }
               }}
-              className={`w-full rounded-[14px] p-[17px] space-y-2 transition-all duration-300 ${
+              className={`w-full rounded-[14px] p-[17px] space-y-2 transition-all duration-300 border ${
                 isSelected 
-                  ? 'bg-[#0F172A] border-2 border-blue-600' 
-                  : 'bg-zinc-800 hover:bg-[#0F172A] border-2 border-transparent hover:border-t-white/10'
+                  ? 'bg-[#0F172A] border-[2px] border-blue-600' 
+                  : 'bg-zinc-800 hover:bg-[#0F172A] border-white/10 hover:border-white/10'
               } ${isFadedIn ? 'opacity-100' : 'opacity-0'}`}
               style={{
                 transitionDelay: `${index * 50}ms`
