@@ -24,16 +24,19 @@ export function RouteSelector({
   const [hoveredStar, setHoveredStar] = useState<string | null>(null);
   const [hoveredLock, setHoveredLock] = useState<string | null>(null);
   
-  // Reorder routes to show selected first, then others
-  const reorderedRoutes = selectedRouteId
-    ? [
-        ...routes.filter(r => r.id === selectedRouteId),
-        ...routes.filter(r => r.id !== selectedRouteId)
-      ]
-    : routes;
+  // Find if selected route is in top 2
+  const selectedIndex = routes.findIndex(r => r.id === selectedRouteId);
+  const isSelectedInTopTwo = selectedIndex < 2;
   
-  const displayedRoutes = showAllRoutes ? reorderedRoutes : reorderedRoutes.slice(0, 2);
-  const hiddenCount = reorderedRoutes.length - 2;
+  // If selected route is NOT in top 2 (index 2+), show only that route
+  // Otherwise show top 2 routes normally
+  const displayedRoutes = showAllRoutes 
+    ? routes 
+    : (selectedRouteId && !isSelectedInTopTwo)
+      ? routes.filter(r => r.id === selectedRouteId)
+      : routes.slice(0, 2);
+  
+  const hiddenCount = routes.length - displayedRoutes.length;
 
   const handleRefresh = () => {
     // Reset fade states
@@ -201,7 +204,7 @@ export function RouteSelector({
       {routes.length > 2 && (
         <button
           onClick={handleToggleRoutes}
-          className="w-full bg-[#111213] rounded-md px-4 py-2 flex items-center justify-center gap-2 hover:bg-[#0F172A] transition-colors"
+          className="w-full bg-zinc-800 rounded-md px-4 py-2 flex items-center justify-center gap-2 hover:bg-zinc-700 transition-colors"
         >
           <ChevronDown className={`w-[10.667px] h-[10.667px] text-white transition-transform ${showAllRoutes ? 'rotate-180' : ''}`} />
           <span className="text-sm font-medium text-white leading-6">

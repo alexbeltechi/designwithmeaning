@@ -169,8 +169,8 @@ export function SwapPanel({
         )}
       </div>
 
-      {/* Token Inputs */}
-      <div className="space-y-1">
+      {/* Token Inputs with Overlapping Swap Button */}
+      <div className="relative space-y-1">
         <TokenInput
           label="You sell"
           value={amount}
@@ -182,21 +182,18 @@ export function SwapPanel({
           isUserEdited={isSellUserEdited}
           onUserEdit={() => {}}
         />
-      </div>
 
-      {/* Swap Button */}
-      <div className="flex justify-center -my-3 relative z-10">
-        <button
-          onClick={handleSwapTokens}
-          className="w-10 h-10 bg-[#111213] border-4 border-[#1c1d21] rounded-[10px] flex items-center justify-center hover:bg-[#1a1c1e] transition-colors"
-          disabled={!fromToken || !toToken}
-        >
-          <ArrowDownUp className="w-6 h-6 text-white" />
-        </button>
-      </div>
+        {/* Swap Button - Overlapping */}
+        <div className="absolute left-1/2 -translate-x-1/2 -bottom-5 z-10">
+          <button
+            onClick={handleSwapTokens}
+            className="w-10 h-10 bg-[#111213] border-4 border-[#1c1d21] rounded-[10px] flex items-center justify-center hover:bg-[#1a1c1e] transition-colors"
+            disabled={!fromToken || !toToken}
+          >
+            <ArrowDownUp className="w-6 h-6 text-white" />
+          </button>
+        </div>
 
-      {/* To Token */}
-      <div className="space-y-1">
         <TokenInput
           label="You buy"
           value={outputAmount}

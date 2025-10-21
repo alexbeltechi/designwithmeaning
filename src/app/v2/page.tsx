@@ -152,6 +152,19 @@ export default function V2Page() {
     loadRoutes(editMode === 'buy');
   };
 
+  const handleLogoClick = () => {
+    // Reset to initial state
+    setFromToken(AVAILABLE_TOKENS[0]); // ETH
+    setToToken(null);
+    setAmount('0');
+    setOutputAmount('0');
+    setRoutes([]);
+    setSelectedRouteId(null);
+    setEditMode(null);
+    setIsBuyUserEdited(false);
+    setIsSellUserEdited(false);
+  };
+
   const selectedRoute = routes.find(r => r.id === selectedRouteId);
 
   // Calculate USD values
@@ -196,7 +209,7 @@ export default function V2Page() {
 
   return (
     <div className="min-h-screen bg-[#111213]">
-      <Header hideIP={hideIP} onHideIPChange={setHideIP} />
+      <Header hideIP={hideIP} onHideIPChange={setHideIP} onLogoClick={handleLogoClick} />
       
       <main className="w-full px-8 pb-20 pt-6">
         <div className="max-w-[1143px] mx-auto flex flex-col items-center gap-6">
