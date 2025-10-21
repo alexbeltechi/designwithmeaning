@@ -93,7 +93,7 @@ export function SwapPanel({
   };
 
   return (
-    <div className="w-full bg-[#1c1d21] rounded-2xl p-4 space-y-4">
+    <div className="w-full bg-zinc-800 rounded-2xl p-4 space-y-4 border-t border-white/10">
       {/* Chain Selector Header */}
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-semibold text-white leading-7">Chain</h2>
@@ -189,7 +189,7 @@ export function SwapPanel({
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
           <button
             onClick={handleSwapTokens}
-            className="w-10 h-10 bg-[#111213] border-4 border-[#1c1d21] rounded-[10px] flex items-center justify-center hover:bg-[#1a1c1e] transition-colors"
+            className="w-10 h-10 bg-[#111213] border-4 border-zinc-800 rounded-[10px] flex items-center justify-center hover:bg-[#1a1c1e] transition-colors"
             disabled={!fromToken || !toToken}
           >
             <ArrowDownUp className="w-6 h-6 text-white" />

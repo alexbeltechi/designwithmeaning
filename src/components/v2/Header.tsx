@@ -29,7 +29,7 @@ export function Header({ hideIP, onHideIPChange, onLogoClick }: HeaderProps) {
         </button>
 
         {/* Wallet Button */}
-        <button className="h-10 px-4 rounded-[10px] bg-[#1c1d21] hover:bg-[#2a2b30] text-white border-none transition-colors">
+        <button className="h-10 px-4 rounded-[10px] bg-zinc-800 hover:bg-[#2a2b30] text-white border-none transition-colors">
           <div className="flex items-center gap-2.5">
             <div className="w-6 h-6 rounded-full bg-gradient-to-br from-purple-400 to-pink-400" />
             <span className="text-base font-medium leading-6 tracking-[-0.3125px]">

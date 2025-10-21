@@ -254,8 +254,8 @@ export default function V2Page() {
                     <div className="flex items-center justify-between h-8">
                       <div className="h-6 w-32 bg-zinc-800 rounded animate-pulse" />
                     </div>
-                    <div className="h-[180px] bg-slate-900 rounded-[14px] animate-pulse" />
-                    <div className="h-[180px] bg-slate-900 rounded-[14px] animate-pulse" />
+                    <div className="h-[180px] bg-zinc-800 rounded-[14px] animate-pulse border-t border-white/10" />
+                    <div className="h-[180px] bg-zinc-800 rounded-[14px] animate-pulse border-t border-white/10" />
                   </div>
                 ) : routes.length > 0 ? (
                   <div className="pt-2">
