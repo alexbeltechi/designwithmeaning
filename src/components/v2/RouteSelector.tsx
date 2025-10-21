@@ -102,10 +102,10 @@ export function RouteSelector({
                   setShowAllRoutes(false);
                 }
               }}
-              className={`w-full rounded-[14px] p-[17px] space-y-2 transition-all duration-300 border-t border-white/10 ${
+              className={`w-full rounded-[14px] p-[17px] space-y-2 transition-all duration-300 ${
                 isSelected 
-                  ? 'bg-zinc-800 border-2 border-blue-600 border-t-white/10' 
-                  : 'bg-zinc-800 hover:bg-zinc-800 border-2 border-transparent'
+                  ? 'bg-[#0F172A] border-2 border-blue-600 border-t border-white/10' 
+                  : 'bg-zinc-800 hover:bg-[#0F172A] border-2 border-transparent border-t border-white/10'
               } ${isFadedIn ? 'opacity-100' : 'opacity-0'}`}
               style={{
                 transitionDelay: `${index * 50}ms`
