@@ -244,6 +244,7 @@ export default function V2Page() {
               onHideIPChange={setHideIP}
               isBuyUserEdited={isBuyUserEdited}
               isSellUserEdited={isSellUserEdited}
+              onRefresh={handleRefresh}
             />
 
             {/* Route Selector - Outside gray card on plain background */}
